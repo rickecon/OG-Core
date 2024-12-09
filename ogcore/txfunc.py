@@ -112,7 +112,7 @@ def get_tax_rates(
             np.squeeze(params[..., 1]),
         )
         if rate_type == "etr":
-            flat_pct_incr_base = 0.03
+            flat_pct_incr_base = 0.045
             txrates = (
                 1 - (lambda_s * (income ** (-tau_s))) + flat_pct_incr_base
             )
