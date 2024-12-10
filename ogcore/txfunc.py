@@ -112,10 +112,10 @@ def get_tax_rates(
             np.squeeze(params[..., 1]),
         )
         if rate_type == "etr":
-            pct_incr_base = 0.05
+            pctpt_incr_base = 0.05
             txrates = (
-                1 - (lambda_s * (income ** (-tau_s)))
-            ) * (1 + pct_incr_base)
+                1 - (lambda_s * (income ** (-tau_s))) + pctpt_incr_base
+            )
         else:  # marginal tax rate function
             txrates = 1 - (lambda_s * (1 - tau_s) * (income ** (-tau_s)))
     elif tax_func_type == "DEP":
