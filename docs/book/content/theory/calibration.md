@@ -153,9 +153,9 @@ In the following section, we detail a list of items to calibrate for a country a
   Finally, the `initial_wealth_ratio` parameter can be used to set $B_0$ as a percent of steady-state GDP $\bar{Y}$. One might do this if one had data on aggregate household wealth in the current period as a percent of GDP. However, this is a bit of a calibration concept mismatch given that we are specifying $B_0$ as a percent of steady-state GDP $\bar{Y}$. If equation {eq}`EqB0calib` specifies $B_0$ as a fraction of $\bar{B}$, and if we also know the steady-state ratio of aggregate household wealth to GDP $\bar{B}/\bar{Y}$, then we can specify $B_0$ as a function of steady-state GDP $\bar{Y}$ with the following equation,
   ```{math}
   :label: EqB0calib_gdp
-    B_0 = \left[\texttt{initial_wealth_ratio}\:\times\:\frac{\bar{B}}{\bar{Y}}\right]\: \bar{Y}
+    B_0 = \left[\texttt{initial_wealth_ratio}\,\times\,\frac{\bar{B}}{\bar{Y}}\right]\, \bar{Y} \:\Leftrightarrow\: \frac{B_0}{\bar{Y}} = \texttt{initial_wealth_ratio}\,\times\,\frac{\bar{B}}{\bar{Y}}
   ```
-  where the term in brackets represents what percentage of steady-state GDP $\bar{Y}$ is $B_0$. In equation {eq}`EqB0calib_gdp`, we can calibrate $B_0$ as a percent of steady-state GDP $\bar{Y}$ while still specifying `init_wealth_ratio` as a percent of steady-state aggregate household wealth $\bar{B}$ as in equation {eq}`EqB0calib_wealth`.
+  where the term in brackets represents what percentage of steady-state GDP $\bar{Y}$ is $B_0$. In equation {eq}`EqB0calib_gdp`, we can calibrate $B_0$ as a percent of steady-state GDP $\bar{Y}$ while still specifying `init_wealth_ratio` as a percent of steady-state aggregate household wealth $\bar{B}$ as in equation {eq}`EqB0calib`.
 
 
 
