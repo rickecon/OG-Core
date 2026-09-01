@@ -176,6 +176,14 @@ _Valid Range:_ min = starting_age and max = 120
 _Out-of-Range Action:_ error  
 
 
+####  `initial_wealth_ratio`  
+_Description:_ Sets aggregate household wealth in the initial period of the transition path: B(0) = initial_wealth_ratio x steady-state B_SS, with the age profile keeping the steady-state shape. Steady-state aggregate household wealth B_SS is the anchor base because it is pinned down exactly before the transition solves, making the anchor static (initial wealth is a predetermined state). Reform runs ignore the parameter and clone the baseline run's initial wealth, so baseline and reform always share the same initial condition. For baseline runs, the default of 1.0 disables the anchor and reproduces the long-standing behavior, in which aggregate initial wealth is set equal to its steady-state level regardless of the initial population.  
+_Notes:_ Preferred calibration approach is to get data on total household wealth from the country in country-currency units in the initial period, then transform that value into model units using the steady-state equilibrium 'factor' variable: B0 = B0_data_currency / factor. This calibration approach means the initial_wealth_ratio value equals B0_data_currency / (factor * B_SS). But one can also choose an initial_wealth_ratio value as a percent of the steady-state value, which directly maps into percentages of steady-state GDP. In these latter two calibration approaches, one might use the current population distribution by age relative to the steady-state population distribution by age to calibrate by what percent current B0 is greater than or less than steady-state B_SS or GDP Y_SS.  
+_Value Type:_ float  
+_Valid Range:_ min = 0.4 and max = 2.0  
+_Out-of-Range Action:_ error  
+
+
 ## Firm Parameters
 
 ### Capital Accumulation
