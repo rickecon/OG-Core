@@ -150,12 +150,18 @@ In the following section, we detail a list of items to calibrate for a country a
 
   Another way to calibrate $B_0$ is to set it to be a fraction of its steady-state value by choosing `initial_wealth_ratio` (see equation {eq}`EqB0calib`), which has a minimum value of 0.4 and a maximum value of 2.0. If the initial population distribution by age $\{\omega_{s,1}\}_{s=1}^{E+S}$ is younger than the steady-state population distribution by age $\{\bar{\omega}_{s}\}_{s=1}^{E+S}$, then we might expect the initial household aggregate wealth to be less than its steady-state value. And the opposite might hold if the initial population distribution were older than the steady-state distribution.
 
-  Finally, the `initial_wealth_ratio` parameter can be used to set $B_0$ as a percent of steady-state GDP $\bar{Y}$. One might do this if one had data on aggregate household wealth in the current period as a percent of GDP. However, this is a bit of a calibration concept mismatch given that we are specifying $B_0$ as a percent of steady-state GDP $\bar{Y}$. If equation {eq}`EqB0calib` specifies $B_0$ as a fraction of $\bar{B}$, and if we also know the steady-state ratio of aggregate household wealth to GDP $\bar{B}/\bar{Y}$, then we can specify $B_0$ as a function of steady-state GDP $\bar{Y}$ with the following equation,
+  The `initial_wealth_ratio` parameter can alsobe used to set $B_0$ as a percent of steady-state GDP $\bar{Y}$. One might do this if one had data on aggregate household wealth in the current period as a percent of GDP. However, this is a bit of a calibration concept mismatch given that we are specifying $B_0$ as a percent of steady-state GDP $\bar{Y}$. If equation {eq}`EqB0calib` specifies $B_0$ as a fraction of $\bar{B}$, and if we also know the steady-state ratio of aggregate household wealth to GDP $\bar{B}/\bar{Y}$, then we can specify $B_0$ as a function of steady-state GDP $\bar{Y}$ with the following equation,
   ```{math}
   :label: EqB0calib_gdp
     B_0 = \left[\texttt{initial_wealth_ratio}\,\times\,\frac{\bar{B}}{\bar{Y}}\right]\, \bar{Y} \:\Leftrightarrow\: \frac{B_0}{\bar{Y}} = \texttt{initial_wealth_ratio}\,\times\,\frac{\bar{B}}{\bar{Y}}
   ```
   where the term in brackets represents what percentage of steady-state GDP $\bar{Y}$ is $B_0$. In equation {eq}`EqB0calib_gdp`, we can calibrate $B_0$ as a percent of steady-state GDP $\bar{Y}$ while still specifying `init_wealth_ratio` as a percent of steady-state aggregate household wealth $\bar{B}$ as in equation {eq}`EqB0calib`.
+
+  Another issue with this parameter is how to set the initial aggregate household wealth $B_0$ in a reform relative to the baseline. The default behavior in OG-Core is for the initial aggregate household wealth in the reform to equal the value in the baseline $B_{0,ref}=B_{0,bas}$, and is governed by the parameter `baseline_init_wealth_ratio=True`. This default behavior sets the reform initial aggregate household wealth equal to its baseline value $B_{0,ref}=B_{0,bas}$ even though the steady-state aggregate household wealth in the reform is likely not equal to its steady-state value in the baseline on which $B_{0,bas}$ is based.
+
+  We allow the user to set a different value for the reform initial aggregate household wealth by setting parameter `baseline_init_wealth_ratio=False` and choosing a different value for `initial_wealth_ratio_ref`. Notice that even when one uses the default value of `initial_wealth_ratio_ref=1.0`, the initial value of aggregate household wealth in the reform will likely differ from the inital value in the baseline because the steady-state value in the reform differs from the baseline.
+
+  The country-specific calibration repositories should have instructions in `calibrate.py` on how to calibrate the `initial_wealth_ratio` parameter.
 
 
 
