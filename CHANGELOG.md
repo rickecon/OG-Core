@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adds documentation in new last section of `calibration.md` on how to calibrate `initial_wealth_ratio` parameter.
 - Removes the extraneous `requirements.txt` file. This file is clearly out-of-date, and I can't see anything that is calling it or using it. `os` is not a PyPI package, it is Python standard library. `taxcalc` is not a dependency of OG-Core. It omits the important dependencies listed in `pyproject.toml`. `requirements.txt` was added in commit `36727c7c` (Aug 2019) as part of "add readthedocs files," and there's no `.readthedocs.yaml` in the repo anymore — docs now build via the Makefile and workflows. It's been touched twice since, last in `f44266f2` (Jul 2024, "Added numba to requirements.txt"), which looks like someone updating it out of habit rather than because anything consumed it.
 - Updates the `uv.lock`.
+- Fixes Issue [#1202](https://github.com/PSLmodels/OG-Core/issues/1202): `get_r_gov` clipped the interest rate on government debt at zero, so a sovereign that genuinely pays a negative real rate could not be modelled. The bound is now a parameter, `r_gov_floor`, with a default of 0.0 that reproduces the previous behaviour exactly.
+- `npv_table` in `output_tables.py` (Issue #1131): builds a table of the net present value of the reform-minus-baseline change in flow variables (e.g. `Y`) over a horizon, evaluated at a list of discount rates. Values are un-stationarized by default so the NPV is taken over the actual (trend-inclusive) level path.
+
+### Bug Fixes
+- Fixes Issue [#1200](https://github.com/PSLmodels/OG-Core/issues/1200): `replacement_rate_adjust` was read only inside `SS_amount`, so it applied to the US-Style Social Security system and was silently ignored under Defined Benefits, Notional Defined Contribution, and Points System. The adjustment is now applied to those three systems in `pension_amount`, via a `replacement_rate_adjustment` helper that mirrors the indexing `SS_amount` already uses, including the per-cohort `t + tt` offset along the time path. `SS_amount` is unchanged, so US-Style results cannot move.
 
 ## [0.20.0] - 2026-08-13 12:00:00
 
