@@ -16,8 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updates the `uv.lock`.
 - Fixes Issue [#1202](https://github.com/PSLmodels/OG-Core/issues/1202): `get_r_gov` clipped the interest rate on government debt at zero, so a sovereign that genuinely pays a negative real rate could not be modelled. The bound is now a parameter, `r_gov_floor`, with a default of 0.0 that reproduces the previous behaviour exactly.
 - `npv_table` in `output_tables.py` (Issue #1131): builds a table of the net present value of the reform-minus-baseline change in flow variables (e.g. `Y`) over a horizon, evaluated at a list of discount rates. Values are un-stationarized by default so the NPV is taken over the actual (trend-inclusive) level path.
+- Fixes Issue [#1202](https://github.com/PSLmodels/OG-Core/issues/1202): `get_r_gov` clipped the interest rate on government debt at zero, so a sovereign that genuinely pays a negative real rate could not be modelled. The bound is now a parameter, `r_gov_floor`, with a default of 0.0 that reproduces the previous behaviour exactly.
+- `npv_table` in `output_tables.py` (Issue #1131): builds a table of the net present value of the reform-minus-baseline change in flow variables (e.g. `Y`) over a horizon, evaluated at a list of discount rates. Values are un-stationarized by default so the NPV is taken over the actual (trend-inclusive) level path.
+- New resource constraint error message, noting the maximum absolute resource-constraint error, the period it occurs in, and the tolerance, plus a one-line note on how to read it
+- Scatter parameters object once per SS solve instead of one per residual evaluation. Pure overhead removal on any Dask-backed SS solve; the larger the Specifications object and the more workers, the more it saves. No numerical change — same solves, same results.
 
 ### Bug Fixes
+
 - Fixes Issue [#1200](https://github.com/PSLmodels/OG-Core/issues/1200): `replacement_rate_adjust` was read only inside `SS_amount`, so it applied to the US-Style Social Security system and was silently ignored under Defined Benefits, Notional Defined Contribution, and Points System. The adjustment is now applied to those three systems in `pension_amount`, via a `replacement_rate_adjustment` helper that mirrors the indexing `SS_amount` already uses, including the per-cohort `t + tt` offset along the time path. `SS_amount` is unchanged, so US-Style results cannot move.
 
 ## [0.20.0] - 2026-08-13 12:00:00
