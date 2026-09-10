@@ -133,9 +133,14 @@ In the following section, we detail a list of items to calibrate for a country a
 ## Other parameters to calibrate
 
 (SecCalibOther_InitW)=
-### Initial distribution of capital $\Gamma_{0}$ and aggregate household wealth $B_0$
+### Initial distribution of capital $\Gamma_1$ and aggregate household wealth $B_1$
 
-  One of the initial state parameters in the transition path equilibrium solution algorithm is the initial distribution of wealth held by households $\mathbf{\hat{\Gamma}}_\equiv\{b_{j,s,1}\}_{j=1,s=E+1}^{J,E+S}$.
+  One of the initial state parameters in the transition path equilibrium solution algorithm is the initial distribution of wealth held by households $\mathbf{\hat{\Gamma}}_1 \equiv \{b_{j,s,1}\}_{j=1,s=E+1}^{J,E+S}$. Note also that the initial value of aggregate household wealth $\hat{B}_1$ is a function of the initial distribution of capital $\mathbf{\hat{\Gamma}}_1$ and the pre-initial period population distribution $\{\hat{\omega}_{s,0}\}_{s=E+1}^{E+S}$ (see equation {eq}`EqStnrz_Bt`).
+
+  ```{math}
+  :label: EqMarkClr_B1
+    B_1 \equiv \frac{1}{1 + \tilde{g}_{n,1}}\sum_{s=E+2}^{E+S+1}\sum_{j=1}^{J}\Bigl(\hat{\omega}_{s-1,0}\lambda_j\hat{b}_{j,s,1} + i_s\hat{\omega}_{s,0}\lambda_j\hat{b}_{j,s,1}\Bigr) \quad\text{where}\quad \frac{1}{1 + \tilde{g}_{n,1}} = \frac{\tilde{N}_0}{\tilde{N}_1}
+  ```
 
   aggregate household wealth $B_0$. The default for this parameter is the steady-state aggregate household wealth $\bar{B}$, but there are a lot of cases in which one would expect the initial aggregate household wealth to differ from its steady-state value.
 
